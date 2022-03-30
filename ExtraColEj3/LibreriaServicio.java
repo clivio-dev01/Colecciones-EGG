@@ -34,12 +34,38 @@ public class LibreriaServicio {
         System.out.println("Ingrese titulo del libro");
         buscado=leer.next();
         Iterator<Libro> it = libre1.getLista_libros().iterator();
-        while (it.hasNext()) {            
-            if (it.next().getTitulo().equalsIgnoreCase(buscado)) {
-                
+        while (it.hasNext()) {
+            Libro aux = it.next();
+            if (aux.getTitulo().equalsIgnoreCase(buscado)) {
+                if (aux.getNumero_ejemplares()>aux.getPrestados()) {
+                    aux.setPrestados(aux.getPrestados()+1);
+                    exitoso=true;
+                }
                 
                 
             }
         }
+        return exitoso;
+    }
+    
+    public boolean devolucion(Libreria libre1){
+        String buscado;
+        int i=0;
+        boolean exitoso=false;
+        System.out.println("Ingrese titulo del libro");
+        buscado=leer.next();
+        Iterator<Libro> it = libre1.getLista_libros().iterator();
+        while (it.hasNext()) {     
+            Libro aux = it.next();
+            if (aux.getTitulo().equalsIgnoreCase(buscado)) {
+                if (aux.getPrestados()>0) {
+                    aux.setPrestados(aux.getPrestados()-1);
+                    exitoso=true;
+                }
+                
+                
+            }
+        }
+        return exitoso;
     }
 }
